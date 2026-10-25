@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NEXORA</title>
+<style>
+  body {
+    margin: 0;
+    background: #07111f;
+    color: white;
+    font-family: Arial, sans-serif;
+    text-align: center;
+  }
+  header {
+    background: #101f33;
+    padding: 16px;
+    color: #00e5a0;
+    letter-spacing: 3px;
+  }
+  .card {
+    background: #12243a;
+    max-width: 360px;
+    margin: 20px auto;
+    padding: 18px;
+    border-radius: 15px;
+  }
+  .points {
+    font-size: 30px;
+    color: #00e5a0;
+    font-weight: bold;
+  }
+  button {
+    padding: 12px 15px;
+    margin: 5px;
+    border: 0;
+    border-radius: 8px;
+    color: white;
+    font-size: 15px;
+  }
+  .green { background: #16834a; }
+  .blue { background: #2563eb; }
+  .grey { background: #475569; }
+  #history {
+    text-align: left;
+    padding-left: 24px;
+    overflow-wrap: anywhere;
+  }
+</style>
+</head>
+<body>
+<header>
+  <h1>NEXORA</h1>
+  <p>FREE DEMO ZONE</p>
+</header>
+
+<div class="card">
+  <h2>Virtual Points</h2>
+  <div class="points" id="points">1000</div>
+  <p>Practice points only — no real money.</p>
+
+  <button class="green" onclick="addPoints()">Add 100 Demo Points</button>
+  <button class="blue" onclick="usePoints()">Use 50 Demo Points</button>
+  <button class="grey" onclick="resetPoints()">Reset to 1000</button>
+
+  <h3>Points History</h3>
+  <ul id="history">
+    <li>Started with 1000 demo points</li>
+  </ul>
+</div>
+
+<script>
+  let points = 1000;
+
+  function updatePoints() {
+    document.getElementById("points").textContent = points;
+  }
+
+  function addHistory(message) {
+    const item = document.createElement("li");
+    item.textContent = message;
+    document.getElementById("history").prepend(item);
+  }
+
+  function addPoints() {
+    points += 100;
+    updatePoints();
+    addHistory("+100 demo points");
+  }
+
+  function usePoints() {
+    if (points < 50) {
+      addHistory("Not enough demo points");
+      return;
+    }
+    points -= 50;
+    updatePoints();
+    addHistory("-50 demo points");
+  }
+
+  function resetPoints() {
+    points = 1000;
+    updatePoints();
+    document.getElementById("history").innerHTML =
+      "<li>Points reset to 1000 demo points</li>";
+  }
+</script>
+</body>
+</html>
